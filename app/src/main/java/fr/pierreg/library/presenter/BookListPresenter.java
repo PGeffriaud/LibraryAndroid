@@ -15,6 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BookListPresenter {
 
+    private Book lastBookSelected;
+
     public Call<List<Book>> getBooks() {
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -25,5 +27,13 @@ public class BookListPresenter {
         HenriPotierService service = retrofit.create(HenriPotierService.class);
 
         return service.listBooks();
+    }
+
+    public Book getLastBookSelected() {
+        return lastBookSelected;
+    }
+
+    public void setLastBookSelected(Book lastBookSelected) {
+        this.lastBookSelected = lastBookSelected;
     }
 }

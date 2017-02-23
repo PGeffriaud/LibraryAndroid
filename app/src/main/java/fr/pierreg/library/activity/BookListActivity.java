@@ -1,5 +1,6 @@
 package fr.pierreg.library.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,6 +50,22 @@ public class BookListActivity extends AppCompatActivity {
                 Timber.e(t);
             }
         });
+
+
+        Book selectedBook = getIntent().getParcelableExtra(BookDetailFragment.ARG_ITEM_ID);
+        Timber.i("Last book selected: " + String.valueOf(selectedBook));
+        if(selectedBook != null && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(BookDetailFragment.ARG_ITEM_ID, selectedBook);
+            BookDetailFragment fragment = new BookDetailFragment();
+            fragment.setArguments(arguments);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.book_detail_container, fragment)
+                    .commit();
+
+
+        }
 
 
     }

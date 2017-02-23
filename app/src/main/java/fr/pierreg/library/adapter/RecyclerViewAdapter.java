@@ -48,27 +48,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.price.setText(book.getPrice() + holder.mView.getResources().getString(R.string.money_symbol));
         Glide.with(holder.mView.getContext()).load(book.getCover()).into(holder.image);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isLandscapeMode) {
-                    Bundle arguments = new Bundle();
-                    arguments.putParcelable(BookDetailFragment.ARG_ITEM_ID, book);
-                    BookDetailFragment fragment = new BookDetailFragment();
-                    fragment.setArguments(arguments);
+        holder.mView.setOnClickListener(v -> openBookDetail(v, book));
+    }
 
-                    ((FragmentActivity)v.getContext()).getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.book_detail_container, fragment)
-                            .commit();
-                } else {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, BookDetailActivity.class);
-                    intent.putExtra(BookDetailFragment.ARG_ITEM_ID, book);
+    private void openBookDetail(View v, Book book) {
+        if (isLandscapeMode) {
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(BookDetailFragment.ARG_ITEM_ID, book);
+            BookDetailFragment fragment = new BookDetailFragment();
+            fragment.setArguments(arguments);
 
-                    context.startActivity(intent);
-                }
-            }
-        });
+            ((FragmentActivity)v.getContext()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.book_detail_container, fragment)
+                    .commit();
+        } else {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, BookDetailActivity.class);
+            intent.putExtra(BookDetailFragment.ARG_ITEM_ID, book);
+
+            context.startActivity(intent);
+        }
     }
 
     @Override
@@ -76,15 +75,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return books.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        public final View mView;
-        public final TextView title;
-        public final TextView price;
-        public final ImageView image;
-        public Book mItem;
+        final View mView;
+        final TextView title;
+        final TextView price;
+        final ImageView image;
+        Book mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             title = (TextView) view.findViewById(R.id.nameTextView);

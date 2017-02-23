@@ -15,11 +15,6 @@ public class Book implements Parcelable {
     private String price;
     private String cover;
 
-    public Book(String title, String price) {
-        this.title = title;
-        this.price = price;
-    }
-
     protected Book(Parcel in) {
         isbn = in.readString();
         title = in.readString();
