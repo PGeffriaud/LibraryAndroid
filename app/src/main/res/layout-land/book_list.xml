@@ -11,12 +11,6 @@
     android:showDividers="middle"
     tools:context="fr.pierreg.library.activity.BookListActivity">
 
-    <!--
-    This layout is a two-pane layout for the Books
-    master/detail flow.
-    
-    -->
-
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/book_list"

@@ -1,11 +1,14 @@
 package fr.pierreg.library.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by PierreG on 23/02/17.
  *
  */
 
-public class Book {
+public class Book implements Parcelable {
 
     private String isbn;
     private String title;
@@ -17,36 +20,39 @@ public class Book {
         this.price = price;
     }
 
-    public String getIsbn() {
-        return isbn;
+    protected Book(Parcel in) {
+        isbn = in.readString();
+        title = in.readString();
+        price = in.readString();
+        cover = in.readString();
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+    public String getIsbn() {
+        return isbn;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
     public String getCover() {
         return cover;
-    }
-
-    public void setCover(String cover) {
-        this.cover = cover;
     }
 
     @Override
@@ -77,5 +83,18 @@ public class Book {
                 ", price='" + price + '\'' +
                 ", cover='" + cover + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(isbn);
+        dest.writeString(title);
+        dest.writeString(price);
+        dest.writeString(cover);
     }
 }

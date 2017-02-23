@@ -37,12 +37,10 @@ public class BookDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            book = new Book("Foo", "22");
 
             Activity activity = this.getActivity();
+            Book book = activity.getIntent().getParcelableExtra(ARG_ITEM_ID);
+
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(book.getTitle());
@@ -57,7 +55,8 @@ public class BookDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (book != null) {
-            ((TextView) rootView.findViewById(R.id.book_detail)).setText(book.getTitle());
+            ((TextView) rootView.findViewById(R.id.book_title)).setText(book.getTitle());
+
         }
 
         return rootView;

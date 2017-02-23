@@ -1,5 +1,9 @@
 package fr.pierreg.library.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,8 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import fr.pierreg.library.R;
+import fr.pierreg.library.activity.BookDetailActivity;
+import fr.pierreg.library.activity.BookDetailFragment;
 import fr.pierreg.library.activity.BookListActivity;
 import fr.pierreg.library.model.Book;
 
@@ -37,13 +43,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(final RecyclerViewAdapter.ViewHolder holder, int position) {
-        Book book = books.get(position);
+        final Book book = books.get(position);
         holder.mItem = book;
         holder.title.setText(book.getTitle());
         holder.price.setText(book.getPrice() + "€");
-        Glide.with(holder.image.getContext()).load(book.getCover()).into(holder.image);
+        Glide.with(holder.mView.getContext()).load(book.getCover()).into(holder.image);
 
-       /* holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isLandscapeMode) {
@@ -51,18 +57,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     arguments.putString(BookDetailFragment.ARG_ITEM_ID, String.valueOf(holder.mItem.hashCode()));
                     BookDetailFragment fragment = new BookDetailFragment();
                     fragment.setArguments(arguments);
-                    getSupportFragmentManager().beginTransaction()
+                    ((FragmentActivity)v.getContext()).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.book_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, BookDetailActivity.class);
-                    intent.putExtra(BookDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                    intent.putExtra(BookDetailFragment.ARG_ITEM_ID, book);
 
                     context.startActivity(intent);
                 }
             }
-        });*/
+        });
     }
 
     @Override
