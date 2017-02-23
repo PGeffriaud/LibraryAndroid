@@ -18,7 +18,6 @@ import java.util.List;
 import fr.pierreg.library.R;
 import fr.pierreg.library.activity.BookDetailActivity;
 import fr.pierreg.library.activity.BookDetailFragment;
-import fr.pierreg.library.activity.BookListActivity;
 import fr.pierreg.library.model.Book;
 
 /**
@@ -46,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         final Book book = books.get(position);
         holder.mItem = book;
         holder.title.setText(book.getTitle());
-        holder.price.setText(book.getPrice() + "€");
+        holder.price.setText(book.getPrice() + holder.mView.getResources().getString(R.string.money_symbol));
         Glide.with(holder.mView.getContext()).load(book.getCover()).into(holder.image);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +53,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 if (isLandscapeMode) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(BookDetailFragment.ARG_ITEM_ID, String.valueOf(holder.mItem.hashCode()));
+                    arguments.putParcelable(BookDetailFragment.ARG_ITEM_ID, book);
                     BookDetailFragment fragment = new BookDetailFragment();
                     fragment.setArguments(arguments);
+
                     ((FragmentActivity)v.getContext()).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.book_detail_container, fragment)
                             .commit();

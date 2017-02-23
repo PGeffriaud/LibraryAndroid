@@ -1,34 +1,26 @@
 package fr.pierreg.library.activity;
 
 import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import fr.pierreg.library.R;
-import fr.pierreg.library.dummy.DummyContent;
 import fr.pierreg.library.model.Book;
 
 public class BookDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
+
     public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private Book book;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public BookDetailFragment() {
     }
 
@@ -39,12 +31,14 @@ public class BookDetailFragment extends Fragment {
         if (getArguments().containsKey(ARG_ITEM_ID)) {
 
             Activity activity = this.getActivity();
-            Book book = activity.getIntent().getParcelableExtra(ARG_ITEM_ID);
+            book = getArguments().getParcelable(ARG_ITEM_ID);
 
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(book.getTitle());
+                appBarLayout.setTitle(getResources().getString(R.string.title_book_detail));
             }
+
+
         }
     }
 
@@ -53,9 +47,13 @@ public class BookDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.book_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
         if (book != null) {
             ((TextView) rootView.findViewById(R.id.book_title)).setText(book.getTitle());
+
+            ImageView cover = (ImageView) rootView.findViewById(R.id.book_cover);
+            Glide.with(this).load(book.getCover()).into(cover);
+
+            ((TextView)rootView.findViewById(R.id.book_price)).setText(book.getPrice() + getResources().getString(R.string.money_symbol));
 
         }
 
