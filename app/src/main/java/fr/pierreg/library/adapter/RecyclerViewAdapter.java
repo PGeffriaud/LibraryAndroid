@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import fr.pierreg.library.R;
+import fr.pierreg.library.activity.BookListActivity;
 import fr.pierreg.library.model.Book;
 
 /**
@@ -37,8 +40,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Book book = books.get(position);
         holder.mItem = book;
         holder.title.setText(book.getTitle());
-        holder.price.setText(book.getPrice() + " €");
-        holder.image.setImageResource(R.mipmap.ic_launcher);
+        holder.price.setText(book.getPrice() + "€");
+        Glide.with(holder.image.getContext()).load(book.getCover()).into(holder.image);
 
        /* holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

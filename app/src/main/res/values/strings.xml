@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">LibraryPierreGeffriaud</string>
+    <string name="app_name">Library Pierre Geffriaud</string>
     <string name="title_book_detail">Book Detail</string>
+    <string name="money_symbol">€</string>
 </resources>
