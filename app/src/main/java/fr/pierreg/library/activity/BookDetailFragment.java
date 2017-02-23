@@ -1,4 +1,4 @@
-package fr.pierreg.library;
+package fr.pierreg.library.activity;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import fr.pierreg.library.R;
 import fr.pierreg.library.dummy.DummyContent;
 import fr.pierreg.library.model.Book;
 

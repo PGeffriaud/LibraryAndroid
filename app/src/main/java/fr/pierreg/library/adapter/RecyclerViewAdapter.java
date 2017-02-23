@@ -1,18 +1,14 @@
 package fr.pierreg.library.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-import fr.pierreg.library.BookDetailActivity;
-import fr.pierreg.library.BookDetailFragment;
 import fr.pierreg.library.R;
 import fr.pierreg.library.model.Book;
 
@@ -41,7 +37,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Book book = books.get(position);
         holder.mItem = book;
         holder.title.setText(book.getTitle());
-        holder.price.setText(book.getPrice());
+        holder.price.setText(book.getPrice() + " €");
+        holder.image.setImageResource(R.mipmap.ic_launcher);
 
        /* holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +72,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public final View mView;
         public final TextView title;
         public final TextView price;
+        public final ImageView image;
         public Book mItem;
 
         public ViewHolder(View view) {
@@ -82,6 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mView = view;
             title = (TextView) view.findViewById(R.id.nameTextView);
             price = (TextView) view.findViewById(R.id.priceTextView);
+            image = (ImageView) view.findViewById(R.id.imageView);
         }
 
     }
