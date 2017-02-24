@@ -1,8 +1,6 @@
 package fr.pierreg.library.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import fr.pierreg.library.R;
 import fr.pierreg.library.model.Book;
@@ -30,14 +31,7 @@ public class BookDetailFragment extends Fragment {
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
 
-            Activity activity = this.getActivity();
             book = getArguments().getParcelable(ARG_ITEM_ID);
-
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(getResources().getString(R.string.title_book_detail));
-            }
-
 
         }
     }
@@ -54,6 +48,10 @@ public class BookDetailFragment extends Fragment {
             Glide.with(this).load(book.getCover()).into(cover);
 
             ((TextView)rootView.findViewById(R.id.book_price)).setText(book.getPrice() + getResources().getString(R.string.money_symbol));
+
+            String synopsis = Arrays.asList(book.getSynopsis()).stream().collect(Collectors.joining("\n"));
+            ((TextView)rootView.findViewById(R.id.book_synopsis)).setText(synopsis);
+
 
         }
 

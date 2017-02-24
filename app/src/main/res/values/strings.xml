@@ -2,4 +2,6 @@
     <string name="app_name">Library Pierre Geffriaud</string>
     <string name="title_book_detail">Book Detail</string>
     <string name="money_symbol">€</string>
+    <string name="book_key">BOOK_ITEM</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu ipsum egestas, tempus ipsum congue, sollicitudin arcu. Pellentesque elementum consectetur laoreet. Nam sit amet accumsan ex, vel tempus ipsum. Sed varius, mauris ac molestie blandit, odio quam condimentum sem, ut rhoncus mi enim nec odio. Sed eu lectus id magna vulputate porta. Nulla finibus nibh vel ex scelerisque, vel dapibus tortor laoreet. Integer gravida eros erat, aliquam venenatis sem tempor eu. Mauris dictum nec sapien id posuere. Aenean malesuada nibh hendrerit dictum efficitur. Phasellus sed pharetra ex.</string>
 </resources>
