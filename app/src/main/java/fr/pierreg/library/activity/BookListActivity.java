@@ -32,7 +32,7 @@ public class BookListActivity extends AppCompatActivity {
         Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
         bar.setTitle(R.string.app_name);
 
-        isLandscapeMode = findViewById(R.id.book_detail_container) != null;
+        isLandscapeMode = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 
         Timber.plant(new Timber.DebugTree());
 
@@ -42,7 +42,7 @@ public class BookListActivity extends AppCompatActivity {
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
                 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.book_list);
                 recyclerView.setLayoutManager(new LinearLayoutManager(BookListActivity.this));
-                recyclerView.setAdapter(new RecyclerViewAdapter(response.body(), isLandscapeMode));
+                recyclerView.setAdapter(new RecyclerViewAdapter(response.body(), isLandscapeMode, presenter));
             }
 
             @Override
@@ -54,20 +54,8 @@ public class BookListActivity extends AppCompatActivity {
 
         Book selectedBook = getIntent().getParcelableExtra(BookDetailFragment.ARG_ITEM_ID);
         Timber.i("Last book selected: " + String.valueOf(selectedBook));
-        if(selectedBook != null && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Bundle arguments = new Bundle();
-            arguments.putParcelable(BookDetailFragment.ARG_ITEM_ID, selectedBook);
-            BookDetailFragment fragment = new BookDetailFragment();
-            fragment.setArguments(arguments);
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.book_detail_container, fragment)
-                    .commit();
-
-
+        if(selectedBook != null) {
+            presenter.openBookDetail(this.findViewById(R.id.list_layout), selectedBook, isLandscapeMode);
         }
-
-
     }
-
 }
