@@ -1,39 +1,47 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/book_title"
-        style="?android:attr/textAppearanceLarge"
+    <LinearLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textIsSelectable="true"
-        tools:context="fr.pierreg.library.activity.BookDetailFragment"
-        tools:text="Henry Pottier Tome 1"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/book_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        tools:text="30 €"/>
+        <TextView
+            android:id="@+id/book_title"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textIsSelectable="true"
+            tools:context="fr.pierreg.library.activity.BookDetailFragment"
+            tools:text="Henry Pottier Tome 1"/>
 
-    <ImageView
-        android:id="@+id/book_cover"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        tools:background="@color/colorAccent"/>
+        <TextView
+            android:id="@+id/book_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="30 €"/>
 
-    <TextView
-        android:id="@+id/book_synopsis"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        tools:text="@string/lorem"/>
+        <ImageView
+            android:id="@+id/book_cover"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            tools:background="@color/colorAccent"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/book_synopsis"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            tools:text="@string/lorem"/>
+
+    </LinearLayout>
+
+</ScrollView>

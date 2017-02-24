@@ -34,7 +34,6 @@ public class BookDetailActivity extends AppCompatActivity {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
 
-
             if (savedInstanceState == null) {
                 Bundle arguments = new Bundle();
                 arguments.putParcelable(BookDetailFragment.ARG_ITEM_ID,
